@@ -1,0 +1,273 @@
+﻿@page
+@model SPC_Main_Web.Pages.PharmacyDashboardModel
+@{
+    ViewData["Title"] = "Pharmacy Dashboard";
+}
+<br>
+<br>
+<h2>Welcome to Pharmacy Dashboard</h2>
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">@TempData["success"]</div>
+}
+@if (TempData["failure"] != null)
+{
+    <div class="alert alert-danger">@TempData["failure"]</div>
+}
+
+<a asp-page="/Index" class="logout-btn">Logout</a>
+
+<style>
+    .sp-body {
+        background-color: #1e1e2e;
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .sp-container {
+        max-width: 1200px;
+        margin: auto;
+        margin-top: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logout-btn {
+        float: right;
+        background-color: #d9534f;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+
+    .table-container {
+        background: #2a2a3a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .table {
+        color: #ffffff;
+        width: 100%;
+    }
+
+        .table th {
+            background-color: #343a40;
+            color: #00cccc;
+        }
+
+        .table tbody tr {
+            transition: 0.3s;
+        }
+
+            .table tbody tr:hover {
+                background-color: #3e4451;
+            }
+
+    .status-active {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .status-inactive {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .cta-button {
+        padding: 12px 30px;
+        background-color: #00cccc;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        margin-right: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .cta-button:hover {
+            background-color: #008080;
+            transform: scale(1.05);
+        }
+
+
+    .cta-button2 {
+        padding: 8px 20px;
+        background-color: #00cccc;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        margin-right: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .cta-button:hover {
+        background-color: #008080;
+        transform: scale(1.05);
+    }
+
+    .form-container {
+        background: #2a2a3a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+</style>
+
+<body class="sp-body">
+    <div class="sp-container">
+        <h3>Available Drugs</h3>
+
+        <!-- Search Bar -->
+        <div class="form-container">
+            <h3>Search for Drugs</h3>
+            <input type="text" id="searchInput" placeholder="Search by name or type" class="form-control" />
+        </div>
+
+        <br>
+        <br>
+
+        @if (Model.AvailableDrugs != null && Model.AvailableDrugs.Any())
+        {
+            <form method="post" asp-page-handler="Buy" id="orderForm">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Available Quantity</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.AvailableDrugs.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model.AvailableDrugs[i].Name</td>
+                                <td>@Model.AvailableDrugs[i].Description</td>
+                                <td>@Model.AvailableDrugs[i].Type</td>
+                                <td>@Model.AvailableDrugs[i].Quantity</td>
+                                <td class="price" data-price="@Model.AvailableDrugs[i].Price">@Model.AvailableDrugs[i].Price</td>
+                                <td>
+                                    <input type="hidden" name="NewOrders[@i].DrugId" value="@Model.AvailableDrugs[i].Id" />
+                                    <input type="number" name="NewOrders[@i].Quantity" min="1" max="@Model.AvailableDrugs[i].Quantity"
+                                           placeholder="Qty" class="quantity-input" data-price="@Model.AvailableDrugs[i].Price" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <br>
+                <br>
+
+                <div class="form-container">
+                    <h3>Customer Information</h3>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" name="PhoneNumber" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Delivery Address:</label>
+                        <textarea name="Address" required></textarea>
+                    </div>
+
+                    <h3>Total Price: $<span id="totalPrice">0.00</span></h3>
+
+                    <button type="submit" class="cta-button">Place Order</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <p>No drugs available at the moment.</p>
+        }
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let quantityInputs = document.querySelectorAll(".quantity-input");
+            let totalPriceElement = document.getElementById("totalPrice");
+
+            function calculateTotal() {
+                let total = 0;
+                quantityInputs.forEach(input => {
+                    let quantity = parseInt(input.value) || 0;
+                    let price = parseFloat(input.getAttribute("data-price"));
+                    total += quantity * price;
+                });
+                totalPriceElement.textContent = total.toFixed(2);
+            }
+
+            quantityInputs.forEach(input => {
+                input.addEventListener("input", calculateTotal);
+            });
+
+            // Search filter logic
+            let searchInput = document.getElementById("searchInput");
+            let rows = document.querySelectorAll(".table tbody tr");
+
+            searchInput.addEventListener("input", function () {
+                let searchValue = searchInput.value.toLowerCase();
+
+                rows.forEach(row => {
+                    let name = row.cells[0].textContent.toLowerCase();
+                    let description = row.cells[1].textContent.toLowerCase();
+                    let type = row.cells[2].textContent.toLowerCase();
+
+                    if (name.includes(searchValue) || description.includes(searchValue) || type.includes(searchValue)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</body>

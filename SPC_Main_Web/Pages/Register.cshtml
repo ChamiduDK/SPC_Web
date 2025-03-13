@@ -1,0 +1,99 @@
+﻿@page
+@model SPC_Main_Web.Pages.RegisterModel
+@{
+}
+
+<style>
+ 
+
+    .container2 {
+        background: #1c1f29;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px #00cccc;
+        max-width: 500px;
+        width: 90%;
+        margin-top: 15%;
+        margin-left: 30%;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        color: #ccc;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .supplier-btn {
+        background: linear-gradient(90deg, #ff4b2b, #ff416c);
+        color: white;
+    }
+
+    .pharmacy-btn {
+        background: linear-gradient(90deg, #36d1dc, #5b86e5);
+        color: white;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    /* CTA Button */
+    .cta-button {
+        padding: 12px 30px;
+        background-color: #00cccc;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+        .cta-button:hover {
+            background-color: #008080;
+            transform: scale(1.05);
+        }
+
+  
+</style>
+
+<body class="rb">
+
+    <div class="container2">
+        <h1>Join Us Today</h1>
+        <p>Register as a Supplier or Pharmacy and start your journey.</p>
+
+        <div class="buttons">
+            <a asp-page="/SupplierRegister" class="btn supplier-btn">Register as Supplier</a>
+            <a asp-page="/PharmacyRegister" class="btn pharmacy-btn">Register as Pharmacy</a>
+        </div>
+    </div>
+
+</body>

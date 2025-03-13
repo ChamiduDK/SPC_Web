@@ -1,0 +1,178 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Global Styles */
+body {
+    background-color: #1c1f29; /* Dark matte blue */
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #161a21; /* Dark Blue */
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+}
+
+    .navbar-brand:hover {
+        color: #00cccc; /* Yellow on hover */
+    }
+
+.navbar-toggler {
+    border-color: #00cccc; /* Yellow border for the hamburger menu */
+}
+
+.navbar-toggler-icon {
+    background-color: #00cccc; /* Yellow hamburger icon */
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+    .nav-link:hover {
+        color: #00cccc; /* Yellow on hover */
+        text-decoration: underline;
+    }
+
+
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* Button Styles */
+.btn-custom {
+    background-color: #00cccc; /* Yellow color */
+    color: #161a21; /* Dark matte blue for text */
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-custom:hover {
+        background-color: #00cccc; /* Lighter yellow */
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+/* Footer Styles */
+footer {
+    background-color: #161a21; /* Dark matte blue */
+    padding: 20px;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer a {
+    color: #00cccc; /* Yellow for links */
+    text-decoration: none;
+}
+
+    .footer a:hover {
+        color: #ffdb4d;
+        /* Keyframe Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+
+    .cta-button {
+        font-size: 1em;
+        padding: 10px 25px;
+    }
+
+    .hero-logo {
+        max-width: 120px;
+    }
+
+    .about-logo {
+        max-width: 100px;
+    }
+}

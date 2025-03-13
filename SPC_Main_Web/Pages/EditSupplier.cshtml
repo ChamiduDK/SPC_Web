@@ -1,0 +1,171 @@
+﻿@page
+@model SPC_Main_Web.Pages.EditSupplierModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Supplier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1e1e2e;
+            color: #ffffff;
+            margin: 0;
+            
+            text-align: center;
+        }
+
+        /* Form Container */
+        .sp-container {
+            max-width: 600px;
+            background: #2a2a3a;
+            padding: 30px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #00cccc;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background: #3e4451;
+                color: white;
+            }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00cccc;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+            button:hover {
+                background-color: #008080;
+                transform: scale(1.05);
+            }
+
+        /* Delete Button */
+        .delete-btn {
+            background-color: #d9534f;
+        }
+
+            .delete-btn:hover {
+                background-color: #c9302c;
+            }
+
+        /* Back Link */
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #00cccc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .back-link:hover {
+                color: #008080;
+            }
+
+        .cta-button {
+            padding: 12px 30px;
+            background-color: #00cccc;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            margin-right: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .cta-button:hover {
+                background-color: #008080;
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+
+<br>
+<br>
+<br>
+<body>
+
+    <div class="sp-container">
+        <h2>Edit Supplier</h2>
+
+        <form method="post">
+            <input type="hidden" asp-for="Supplier.Id" />
+
+            <div class="form-group">
+                <label>Name:</label>
+                <input asp-for="Supplier.Name" required />
+            </div>
+
+            <div class="form-group">
+                <label>Email:</label>
+                <input asp-for="Supplier.Email" required />
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input asp-for="Supplier.PhoneNumber" required />
+            </div>
+
+            <div class="form-group">
+                <label>Address:</label>
+                <input asp-for="Supplier.Address" required />
+            </div>
+
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea asp-for="Supplier.Description"></textarea>
+            </div>
+
+            <button type="submit" asp-page-handler="Update">Update</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="id" value="@Model.Supplier.Id" />
+            <button type="submit" asp-page-handler="Delete" class="delete-btn" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+
+        <a asp-page="/AdminDB" class="back-link">Back</a>
+    </div>
+
+</body>
+</html>

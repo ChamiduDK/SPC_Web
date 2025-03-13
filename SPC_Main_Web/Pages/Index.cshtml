@@ -1,0 +1,160 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<style>
+    /* Hero Section */
+    .hero {
+        background: url('your-image.jpg') no-repeat center center/cover;
+        height: 70vh;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        
+        position: relative;
+        overflow: hidden;
+        gap: 20px;
+    }
+
+        /* Background Overlay */
+        .hero::after {
+            content: '';
+            background: rgba(28, 31, 41, 0.7);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 50%;
+    }
+
+        .hero-content h1 {
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            color:white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            max-width: 600px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+    /* CTA Button */
+    .cta-button {
+        padding: 12px 30px;
+        background-color: #00cccc;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        margin-right:10px;
+    }
+
+        .cta-button:hover {
+            background-color: #008080;
+            transform: scale(1.05);
+        }
+
+    /* Logo Styling */
+    .logo-container {
+        position: relative;
+        z-index: 2;
+        max-width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .logo-container img {
+            max-width: 1000px;
+            height: auto;
+            filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
+        }
+
+    /* About Section */
+    .about-section {
+        padding: 40px 20px;
+        background-color: rgba(28, 31, 41, 0.7);
+        text-align: center;
+    }
+
+    .about-content {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .about-logo {
+        max-width: 120px;
+        margin-bottom: 20px;
+    }
+
+    .about-section h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    .about-section p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    
+</style>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to State Pharmaceutical Cooperation (SPC)</h1>
+        
+        <p>Dedicated to providing quality pharmaceutical products to meet national needs. Join us in our mission to improve healthcare through technology and innovation.</p>
+        <a href="#about" class="cta-button" style="color:white;">Learn More</a><a asp-page="/Register" class="cta-button" style="color:white;">Join Us</a>
+    </div>
+    <div class="logo-container">
+        <img src="img/logo2.png" alt="SPC Logo" class="hero-logo">
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="about-content">
+        <h2><b>About SPC</b></h2>
+        <p>SPC is responsible for pharmaceutical drug manufacturing and importing, ensuring access to essential medicines across the nation.</p>
+    </div>
+
+    <div style="display: flex; gap: 45px; justify-content: center; align-items: center; padding: 20px;">
+        <img src="img/SPC LOGO.png" alt="SPC Logo" class="hero-logo"
+             style="width: 350px; height: auto; border-radius: 10px; box-shadow: 0px 0px 20px #00cccc;">
+        <img src="img/SPCNEW.png" alt="SPC Logo" class="hero-logo"
+             style="width: 350px; height: auto; border-radius: 10px; box-shadow: 0px 0px 20px #00cccc;">
+        <img src="img/SPCWH.png" alt="SPC Logo" class="hero-logo"
+             style="width: 350px; height: auto; border-radius: 10px; box-shadow: 0px 0px 20px #00cccc;">
+    </div>
+</section>
+

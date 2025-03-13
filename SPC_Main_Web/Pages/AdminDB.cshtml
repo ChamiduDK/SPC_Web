@@ -1,0 +1,186 @@
+﻿@page
+@model SPC_Main_Web.Pages.AdminDBModel
+@{
+}
+<span>@TempData["success"]</span>
+<span>@TempData["failure"]</span>
+
+<div class="sp-body">
+    <div class="sp-container">
+        <h1 class="display-4">SPC Admin</h1>
+        <p>Manage Supplier</p>
+        <div class="table-container">
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                </tr>
+                @foreach (var Supplier in Model.Suppliers)
+                {
+                    <tr>
+                        <td>@Supplier.Id</td>
+                        <td>@Supplier.Name</td>
+                        <td>@Supplier.Email</td>
+                        <td>@Supplier.PhoneNumber</td>
+                        <td>@Supplier.Address</td>
+                        <td>@Supplier.Description</td>
+                        <td>
+                            <a class="cta-button" asp-page="EditSupplier" asp-route-id="@Supplier.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+
+        <p>Manage Pharmacy</p>
+        <div class="table-container">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Edit</th>
+
+            </tr>
+            @foreach (var Pharmacy in Model.Pharmacies)
+            {
+                <tr>
+
+                    <td>@Pharmacy.Id</td>
+                    <td>@Pharmacy.Name</td>
+                    <td>@Pharmacy.Address</td>
+                    <td>@Pharmacy.Phone</td>
+                    <td>@Pharmacy.Email</td>
+                    <td>
+                        <a class="cta-button" asp-page="EditPharmacy1" asp-route-id="@Pharmacy.Id">Edit</a>
+                    </td>
+                </tr>
+            }
+             </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .sp-body {
+        background-color: #1e1e2e;
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .sp-container {
+        max-width: 1200px;
+        margin: auto;
+        margin-top: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logout-btn {
+        float: right;
+        background-color: #d9534f;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+
+    .table-container {
+        background: #2a2a3a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .table {
+        color: #ffffff;
+        width: 100%;
+    }
+
+        .table th {
+            background-color: #343a40;
+            color: #00cccc;
+        }
+
+        .table tbody tr {
+            transition: 0.3s;
+        }
+
+            .table tbody tr:hover {
+                background-color: #3e4451;
+            }
+
+    .status-active {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .status-inactive {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .cta-button {
+        padding: 12px 30px;
+        background-color: #00cccc;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        margin-right: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .cta-button:hover {
+            background-color: #008080;
+            transform: scale(1.05);
+        }
+
+    .form-container {
+        background: #2a2a3a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+</style>

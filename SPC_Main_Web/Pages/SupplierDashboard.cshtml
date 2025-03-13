@@ -1,0 +1,236 @@
+﻿@page
+@model SPC_Main_Web.Pages.SupplierDashboardModel
+@{
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">@TempData["success"]</div>
+}
+@if (TempData["failure"] != null)
+{
+    <div class="alert alert-danger">@TempData["failure"]</div>
+}
+
+
+<a asp-page="/Index" class="logout-btn">Logout</a>
+
+<style>
+    .sp-body {
+        background-color: #1e1e2e;
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
+        
+    }
+
+    .sp-container {
+        max-width: 1200px;
+        margin: auto;
+        margin-top: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logout-btn {
+        float: right;
+        background-color: #d9534f;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+
+    .table-container {
+        background: #2a2a3a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .table {
+        color: #ffffff;
+        width: 100%;
+    }
+
+        .table th {
+            background-color: #343a40;
+            color: #00cccc;
+        }
+
+        .table tbody tr {
+            transition: 0.3s;
+        }
+
+            .table tbody tr:hover {
+                background-color: #3e4451;
+            }
+
+    .status-active {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .status-inactive {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .cta-button {
+        padding: 12px 30px;
+        background-color: #00cccc;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+        margin-right: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .cta-button:hover {
+            background-color: #008080;
+            transform: scale(1.05);
+        }
+
+    .form-container {
+        background: #2a2a3a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+</style>
+
+<body class="sp-body">
+    <div class="sp-container">
+        <h2>Welcome to the Supplier Dashboard</h2>
+
+        <div class="table-container mt-4">
+            <h2>Tender Ads</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tender Code</th>
+                        <th>Drug Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tenderAd in Model.TenderAd)
+                    {
+                        <tr>
+                            <td>@tenderAd.Tender_Code</td>
+                            <td>@tenderAd.Drug_Name</td>
+                            <td>@tenderAd.Description</td>
+                            <td>@tenderAd.Quantity</td>
+                            <td>@tenderAd.Due_Date.ToString("yyyy-MM-dd")</td>
+                            <td class="@(tenderAd.Status ? "status-active" : "status-inactive")">
+                                @(tenderAd.Status ? "Active" : "Inactive")
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-container mt-5">
+            <h2>Submit a Tender</h2>
+            <form method="post">
+
+                <div class="form-group">
+                    <label for="Tender_Code">Tender Code:</label>
+                    <input type="text" id="Tender_Code" required asp-for="tender.Tender_Code" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Drug">Drug Name:</label>
+                    <input type="text" id="Drug" required asp-for="tender.Drug" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <textarea id="Description" rows="4" asp-for="tender.Description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="Price">Price:</label>
+                    <input type="number" id="Price" required asp-for="tender.Price" step="0.01" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Quantity">Quantity:</label>
+                    <input type="number" id="Quantity" required asp-for="tender.Quantity" />
+                </div>
+
+                <button type="submit" class="cta-button">Submit</button>
+            </form>
+        </div>
+
+        <div class="table-container mt-4">
+            <h2>Submited Tenders</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tender Code</th>
+                        <th>Drug Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tender in Model.TenderData)
+                    {
+                        <tr>
+                            <td>@tender.Tender_Code</td>
+                            <td>@tender.Drug</td>
+                            <td>@tender.Price</td>
+                            <td>@tender.Description</td>
+                            <td>@tender.Quantity</td>
+                            <td class="@(tender.Status ? "status-active" : "status-inactive")">
+                                @(tender.Status ? "Accepted" : "Pending")
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</body>
